@@ -10,7 +10,7 @@
 ]]
 
 if debugX then
-	warn('Initialising Rayfield')
+
 end
 
 local function getService(name)
@@ -45,7 +45,7 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 
 	local timeoutThread = task.delay(timeout, function()
 		if not requestCompleted then
-			warn(`Request for {url} timed out after {timeout} seconds`)
+				
 			task.cancel(requestThread)
 			result = "Request timed out"
 			requestCompleted = true
@@ -61,7 +61,6 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 		task.cancel(timeoutThread)
 	end
 	if not success then
-		warn(`Failed to process {url}: {result}`)
 	end
 	return if success then result else nil
 end
@@ -95,7 +94,6 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 
 	local timeoutThread = task.delay(timeout, function()
 		if not requestCompleted then
-			warn(`Request for {url} timed out after {timeout} seconds`)
 			task.cancel(requestThread)
 			result = "Request timed out"
 			requestCompleted = true
@@ -111,7 +109,6 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 		task.cancel(timeoutThread)
 	end
 	if not success then
-		warn(`Failed to process {url}: {result}`)
 	end
 	return if success then result else nil
 end
@@ -223,23 +220,23 @@ local function loadSettings()
 	
 	if not success then 
 		if writefile then
-			warn('Rayfield had an issue accessing configuration saving capability.')
+	
 		end
 	end
 end
 
 if debugX then
-	warn('Now Loading Settings Configuration')
+
 end
 
 loadSettings()
 
 if debugX then
-	warn('Settings Loaded')
+
 end
 
 if debugX then
-	warn('Moving on to continue initialisation')
+
 end
 
 local RayfieldLibrary = {
@@ -780,21 +777,20 @@ end
 
 local function getIcon(name : string): {id: number, imageRectSize: Vector2, imageRectOffset: Vector2}
 	if not Icons then
-		warn("Lucide Icons: Cannot use icons as icons library is not loaded")
+
 		return
 	end
 	name = string.match(string.lower(name), "^%s*(.*)%s*$") :: string
 	local sizedicons = Icons['48px']
 	local r = sizedicons[name]
 	if not r then
-		error(`Lucide Icons: Failed to find icon by the name of "{name}"`, 2)
 	end
 
 	local rirs = r[2]
 	local riro = r[3]
 
 	if type(r[1]) ~= "number" or type(rirs) ~= "table" or type(riro) ~= "table" then
-		error("Lucide Icons: Internal error: Invalid auto-generated asset entry")
+
 	end
 
 	local irs = Vector2.new(rirs[1], rirs[2])
@@ -814,9 +810,9 @@ local function getAssetUri(id: any): string
 	if type(id) == "number" then
 		assetUri = "rbxassetid://" .. id
 	elseif type(id) == "string" and not Icons then
-		warn("Rayfield | Cannot use Lucide icons as icons library is not loaded")
+
 	else
-		warn("Rayfield | The icon argument must either be an icon ID (number) or a Lucide icon name (string)")
+
 	end
 	return assetUri
 end
@@ -912,7 +908,7 @@ local function LoadConfiguration(Configuration)
 	local success, Data = pcall(function() return HttpService:JSONDecode(Configuration) end)
 	local changed
 
-	if not success then warn('Rayfield had an issue decoding the configuration file, please try delete the file and reopen Rayfield.') return end
+	if not success then  return end
 
 	-- Iterate through current UI elements' flags
 	for FlagName, Flag in pairs(RayfieldLibrary.Flags) do
@@ -980,7 +976,7 @@ local function SaveConfiguration()
 	end
 
 	if debugX then
-		warn(HttpService:JSONEncode(Data))
+
 	end
 
 	if writefile then
@@ -1477,7 +1473,7 @@ local function createSettings(window)
 	if not (writefile and isfile and readfile and isfolder and makefolder) and not useStudio then
 		if Topbar['Settings'] then Topbar.Settings.Visible = false end
 		Topbar['Search'].Position = UDim2.new(1, -75, 0.5, 0)
-		warn('Can\'t create settings as no file-saving functionality is available.')
+
 		return
 	end
 
@@ -1570,7 +1566,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			assert(keybind.EnumType == Enum.KeyCode, "ToggleUIKeybind must be a KeyCode enum")
 			overrideSetting("General", "rayfieldOpen", keybind.Name)
 		else
-			error("ToggleUIKeybind must be a string or KeyCode enum")
 		end
 	end
 
@@ -3145,7 +3140,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 
 				local Success, Response = pcall(function()
-					if debugX then warn('Running toggle \''..ToggleSettings.Name..'\' (Interact)') end
+					if debugX then  end
 
 					ToggleSettings.Callback(ToggleSettings.CurrentValue)
 				end)
@@ -3194,7 +3189,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 
 				local Success, Response = pcall(function()
-					if debugX then warn('Running toggle \''..ToggleSettings.Name..'\' (:Set)') end
+					if debugX then  end
 
 					ToggleSettings.Callback(ToggleSettings.CurrentValue)
 				end)
@@ -3496,7 +3491,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		createSettings(Window)
 	end)
 	
-	if not success then warn('Rayfield had an issue creating settings.') end
+	if not success then  end
 	
 	return Window
 end
@@ -3658,7 +3653,7 @@ function RayfieldLibrary:LoadConfiguration()
 	local config
 
 	if debugX then
-		warn('Loading Configuration')
+
 	end
 
 	if useStudio then
@@ -3688,7 +3683,7 @@ function RayfieldLibrary:LoadConfiguration()
 		if success and loaded and not notified then
 			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
 		elseif not success and not notified then
-			warn('Rayfield Configurations Error | '..tostring(result))
+	
 			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
 		end
 	end
