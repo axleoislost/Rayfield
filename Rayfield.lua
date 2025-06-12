@@ -1,4 +1,4 @@
-pcall(function()	
+
 	if debugX then
 	
 	end
@@ -3705,4 +3705,3 @@ pcall(function()
 	end)
 	
 	return RayfieldLibrary
-end)
