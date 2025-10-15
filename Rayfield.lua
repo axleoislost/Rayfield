@@ -3519,7 +3519,7 @@ local hideHotkeyConnection -- Has to be initialized here since the connection is
 function RayfieldLibrary:Destroy()
 	rayfieldDestroyed = true
 	hideHotkeyConnection:Disconnect()
-	--Rayfield:Destroy()
+	Rayfield:Destroy()
 end
 
 Topbar.ChangeSize.MouseButton1Click:Connect(function()
