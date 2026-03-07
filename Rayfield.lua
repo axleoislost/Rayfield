@@ -1577,7 +1577,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	-- If folder doesn't exist, safely try to create it
 	if success and not folderExists then
 	    pcall(function()
-	        makefolder(RayfieldFolder)
+	        --makefolder(RayfieldFolder)
 	    end)
 	end
 
@@ -1656,7 +1656,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		if Settings.ConfigurationSaving.Enabled then
 			if not isfolder(ConfigurationFolder) then
-				makefolder(ConfigurationFolder)
+				--makefolder(ConfigurationFolder)
 			end	
 		end
 	end)
@@ -1711,7 +1711,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 
 		if isfolder and not isfolder(RayfieldFolder.."/Key System") then
-			makefolder(RayfieldFolder.."/Key System")
+			--makefolder(RayfieldFolder.."/Key System")
 		end
 
 		if typeof(Settings.KeySettings.Key) == "string" then Settings.KeySettings.Key = {Settings.KeySettings.Key} end
