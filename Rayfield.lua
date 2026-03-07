@@ -1569,8 +1569,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 	end
 
-	if isfolder and not isfolder(RayfieldFolder) then
-		makefolder(RayfieldFolder)
+	-- Safely check if folder exists
+	local success, folderExists = pcall(function()
+	    return isfolder and isfolder(RayfieldFolder)
+	end)
+	
+	-- If folder doesn't exist, safely try to create it
+	if success and not folderExists then
+	    pcall(function()
+	        makefolder(RayfieldFolder)
+	    end)
 	end
 
 	local Passthrough = false
