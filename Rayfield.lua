@@ -1676,7 +1676,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	if Settings.Discord and Settings.Discord.Enabled and not useStudio then
 		if isfolder and not isfolder(RayfieldFolder.."/Discord Invites") then
-			makefolder(RayfieldFolder.."/Discord Invites")
+			--makefolder(RayfieldFolder.."/Discord Invites")
 		end
 
 		if isfile and not isfile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension) then
