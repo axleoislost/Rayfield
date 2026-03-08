@@ -672,8 +672,8 @@ function NullLib:CreateWindow(cfg)
                 corner(fill,3)
 
                 local knob=ni("Frame",{
-                    Size=UDim2.new(0,16,0,16),
-                    Position=UDim2.new((cur-mn)/(mx-mn),-8,0.5,-8),
+                      Size=UDim2.new(0,12,0,12),
+                    Position=UDim2.new((cur-mn)/(mx-mn),-8,0.5,-6),
                     BackgroundColor3=C.White,BorderSizePixel=0,ZIndex=2,
                 },track)
                 corner(knob,8)
@@ -685,7 +685,7 @@ function NullLib:CreateWindow(cfg)
                     v = math.clamp(tonumber(string.format("%." .. decimals .. "f", math.round(v/inc)*inc)), mn, mx); cur=v
                     if config.Flag then NullLib.Flags[config.Flag]=v end
                     local p=(v-mn)/(mx-mn)
-                    fill.Size=UDim2.new(p,0,1,0); knob.Position=UDim2.new(p,-8,0.5,-8)
+                    fill.Size=UDim2.new(p,0,1,0); knob.Position=UDim2.new(p,-6,0.5,-6)
                     vLbl.Text=tostring(v)..suf
                     if config.Callback then task.spawn(config.Callback,v) end
                 end
