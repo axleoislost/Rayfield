@@ -514,10 +514,15 @@ function NullLib:CreateWindow(cfg)
             end
 
 
-            local function makeFullCell(h)
-				local cell=makeHalfCell(50)
-                return cell
-            end
+			local function makeFullCell(h)
+			    closePairRow()
+			    local cell = ni("Frame",{
+			        Size=UDim2.new(1,0,0,h or CELL_H),
+			        BackgroundTransparency=1,
+			    },rowsFrame)
+			    closePairRow()
+			    return cell
+			end
 
             local function makeRow(parent)
                 local el=ni("Frame",{
@@ -632,12 +637,7 @@ function NullLib:CreateWindow(cfg)
                 local suf=config.Suffix or ""
                 local cur=config.CurrentValue or mn
                 if config.Flag then NullLib.Flags[config.Flag]=cur end
-                closePairRow()
-                local cell = ni("Frame",{
-                    Size=UDim2.new(1,0,0,50),
-                    BackgroundTransparency=1,
-                },rowsFrame)
-                closePairRow()
+				local cell=makeHalfCell(50)
                 local el=ni("Frame",{Size=UDim2.new(1,0,1,0),BackgroundColor3=C.Row,BorderSizePixel=0},cell)
                 corner(el,7)
 
